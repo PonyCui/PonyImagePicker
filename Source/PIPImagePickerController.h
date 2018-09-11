@@ -9,11 +9,25 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
+@class PIPImagePickerController;
+
+@protocol PIPImagePickerControllerDelegate
+
+@required
+- (void)imagePicker:(PIPImagePickerController *)imagePickerController
+        didFinishPickedImages:(NSArray<UIImage *> *)images;
+
+@end
+
 @interface PIPImagePickerController : UINavigationController
 
+@property (nonatomic, weak) id<PIPImagePickerControllerDelegate> imagePickerDelegate;
 @property (nonatomic, assign) BOOL allowMultipeSelection;
 @property (nonatomic, assign) NSInteger maximumMultipeSelection;
 @property (nonatomic, assign) PHAssetMediaType allowMediaTypes;
 @property (nonatomic, assign) BOOL allowMutlipeMediaTypes;
+@property (nonatomic, assign) NSInteger maximumBoundsOfImages;
+
+- (void)onCommit;
 
 @end

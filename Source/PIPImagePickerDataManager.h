@@ -15,6 +15,7 @@
 @property (nonatomic, assign) NSInteger maximumMultipeSelection;
 @property (nonatomic, assign) PHAssetMediaType allowMediaTypes;
 @property (nonatomic, assign) BOOL allowMutlipeMediaTypes;
+@property (nonatomic, assign) NSInteger maximumBoundsOfImages;
 @property (nonatomic, strong) NSMutableArray<PHAsset *> *selectedAssets;
 
 - (void)grantPermission:(nonnull void (^)(void))resolver
@@ -23,6 +24,8 @@
 - (nonnull NSArray<PHAssetCollection *> *)fetchAssetCollectionsItems;
 
 - (nonnull NSArray<PHAsset *> *)fetchAssetsItems:(nullable PHCollection *)inCollection;
+
+- (void)fetchSelectedAssetsAsImages:(void (^)(NSArray<UIImage*> *))resolver rejector:(nonnull void(^)(void))rejector;
 
 - (void)notifySelectedAssetsChanged;
 

@@ -99,6 +99,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.dataManager.selectedAssets removeAllObjects];
     if (indexPath.section == 0) {
         PIPAlbumDetailViewController *detailViewController = [[PIPAlbumDetailViewController alloc] init];
         detailViewController.dataManager = self.dataManager;

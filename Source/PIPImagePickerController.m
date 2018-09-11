@@ -27,6 +27,7 @@
         _maximumMultipeSelection = 9;
         _allowMediaTypes = PHAssetMediaTypeImage;
         _allowMutlipeMediaTypes = NO;
+        _maximumBoundsOfImages = 640;
     }
     return self;
 }
@@ -49,6 +50,20 @@
     }];
 }
 
+- (void)onCommit {
+    [self.dataManager fetchSelectedAssetsAsImages:^(NSArray<UIImage *> *images) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.imagePickerDelegate imagePicker:self didFinishPickedImages:images];
+        }];
+    } rejector:^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                                 message:@"获取图片数据失败，请重试。"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
+}
+
 - (void)setAllowMultipeSelection:(BOOL)allowMultipeSelection {
     _allowMultipeSelection = allowMultipeSelection;
     self.dataManager.allowMultipeSelection = allowMultipeSelection;
@@ -67,6 +82,11 @@
 - (void)setAllowMutlipeMediaTypes:(BOOL)allowMutlipeMediaTypes {
     _allowMutlipeMediaTypes = allowMutlipeMediaTypes;
     self.dataManager.allowMutlipeMediaTypes = allowMutlipeMediaTypes;
+}
+
+- (void)setMaximumBoundsOfImages:(NSInteger)maximumBoundsOfImages {
+    _maximumBoundsOfImages = maximumBoundsOfImages;
+    self.dataManager.maximumBoundsOfImages = maximumBoundsOfImages;
 }
 
 @end

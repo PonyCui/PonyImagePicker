@@ -19,6 +19,7 @@
         _maximumMultipeSelection = 9;
         _allowMediaTypes = PHAssetMediaTypeImage;
         _allowMutlipeMediaTypes = NO;
+        _maximumBoundsOfImages = 640;
         _selectedAssets = [NSMutableArray array];
     }
     return self;
@@ -100,6 +101,58 @@
         }
         return [assets copy];
     }
+}
+
+- (void)fetchSelectedAssetsAsImages:(void (^)(NSArray<UIImage*> *))resolver rejector:(void (^)(void))rejector {
+    NSMutableArray *assets = self.selectedAssets.mutableCopy;
+    NSMutableArray *results = [NSMutableArray array];
+    [self fetchSelectionAssetsImages:assets results:results resolver:^{
+        resolver(results.copy);
+    } rejector:^{
+        rejector();
+    }];
+}
+
+- (void)fetchSelectionAssetsImages:(NSMutableArray *)assets
+                           results:(NSMutableArray *)results
+                          resolver:(void (^)(void))resolver
+                          rejector:(void (^)(void))rejector {
+    if (assets.count == 0) {
+        resolver();
+        return;
+    }
+    PHAsset *asset = [assets firstObject];
+    [assets removeObjectAtIndex:0];
+    [self doFetchAssetImage:asset resolver:^(UIImage *result) {
+        [results addObject:result];
+        [self fetchSelectionAssetsImages:assets
+                                 results:results
+                                resolver:resolver
+                                rejector:rejector];
+    } rejector:^{
+        rejector();
+    }];
+}
+
+- (void)doFetchAssetImage:(PHAsset *)asset resolver:(void (^)(UIImage *))resolver rejector:(void (^)(void))rejector {
+    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
+    option.networkAccessAllowed = YES;
+    option.synchronous = YES;
+    option.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+    option.resizeMode = PHImageRequestOptionsResizeModeExact;
+    [[PHImageManager defaultManager]
+     requestImageForAsset:asset
+     targetSize:CGSizeMake(self.maximumBoundsOfImages, self.maximumBoundsOfImages)
+     contentMode:PHImageContentModeAspectFit
+     options:option
+     resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+         if (result != nil) {
+             resolver(result);
+         }
+         else {
+             rejector();
+         }
+    }];
 }
 
 - (void)notifySelectedAssetsChanged {

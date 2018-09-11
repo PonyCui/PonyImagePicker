@@ -9,6 +9,7 @@
 #import "PIPAlbumDetailViewController.h"
 #import "PIPAssetCollectionViewCell.h"
 #import "PIPAlbumDetailPageViewController.h"
+#import "PIPImagePickerController.h"
 
 @interface PIPAlbumDetailViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -96,6 +97,8 @@
             for (PIPAssetCollectionViewCell *cell in [strongSelf.collectionView visibleCells]) {
                 [cell resetSelectionState];
             }
+            strongSelf.previewItem.enabled = self.dataManager.selectedAssets.count > 0;
+            strongSelf.finishedItem.enabled = self.dataManager.selectedAssets.count > 0;
         }
     }];
 }
@@ -105,11 +108,17 @@
 }
 
 - (void)onPreview {
-    
+    PIPAlbumDetailPageViewController *pageViewController = [[PIPAlbumDetailPageViewController alloc] init];
+    pageViewController.dataManager = self.dataManager;
+    pageViewController.currentAsset = self.dataManager.selectedAssets.firstObject;
+    pageViewController.collectionAssets = self.dataManager.selectedAssets.copy;
+    [self.navigationController pushViewController:pageViewController animated:YES];
 }
 
 - (void)onCommit {
-    
+    if ([self.navigationController isKindOfClass:[PIPImagePickerController class]]) {
+        [(PIPImagePickerController *)self.navigationController onCommit];
+    }
 }
 
 - (void)viewWillLayoutSubviews {
@@ -155,6 +164,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.collectionAssets.count) {
         PIPAlbumDetailPageViewController *pageViewController = [[PIPAlbumDetailPageViewController alloc] init];
+        pageViewController.dataManager = self.dataManager;
         pageViewController.currentAsset = self.collectionAssets[indexPath.row];
         pageViewController.collectionAssets = self.collectionAssets;
         [self.navigationController pushViewController:pageViewController animated:YES];
