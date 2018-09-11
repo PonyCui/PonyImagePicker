@@ -21,6 +21,7 @@
 
 - (IBAction)doPickImages:(id)sender {
     PIPImagePickerController *imagePickerController = [[PIPImagePickerController alloc] init];
+//    imagePickerController.allowMultipeSelection = NO;
     [self presentViewController:imagePickerController animated:YES completion:^{
         
     }];

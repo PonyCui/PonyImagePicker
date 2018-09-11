@@ -103,7 +103,8 @@
         else {
             self.selectedButton.hidden = YES;
             self.selectButton.hidden = NO;
-            if (self.viewController.dataManager.selectedAssets.count >= self.viewController.dataManager.maximumMultipeSelection) {
+            if (self.viewController.dataManager.selectedAssets.count >= self.viewController.dataManager.maximumMultipeSelection ||
+                (!self.viewController.dataManager.allowMultipeSelection && self.viewController.dataManager.selectedAssets.count > 0)) {
                 self.selectButton.enabled = NO;
                 self.imageView.alpha = 0.35;
             }

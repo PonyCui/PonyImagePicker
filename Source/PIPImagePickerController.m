@@ -28,6 +28,7 @@
         _allowMediaTypes = PHAssetMediaTypeImage;
         _allowMutlipeMediaTypes = NO;
         _maximumBoundsOfImages = 640;
+        _dataManager = [[PIPImagePickerDataManager alloc] init];
     }
     return self;
 }
@@ -35,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.dataManager = [[PIPImagePickerDataManager alloc] init];
     [self.dataManager grantPermission:^{
         PIPAlbumListViewController *albumListViewController = [[PIPAlbumListViewController alloc] init];
         albumListViewController.dataManager = self.dataManager;

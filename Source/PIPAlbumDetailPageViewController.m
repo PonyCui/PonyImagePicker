@@ -163,7 +163,8 @@
         }
         else {
             self.selectButton.frame = CGRectMake(0, 0, 44, 44);
-            self.selectButton.enabled = self.dataManager.selectedAssets.count < self.dataManager.maximumMultipeSelection;
+            self.selectButton.enabled = !(self.dataManager.selectedAssets.count >= self.dataManager.maximumMultipeSelection ||
+            (!self.dataManager.allowMultipeSelection && self.dataManager.selectedAssets.count > 0));
             self.selectButton.userInteractionEnabled = self.selectButton.enabled;
             self.selectButton.alpha = self.selectButton.enabled ? 1.0 : 0.35;
             UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.selectButton];
