@@ -13,6 +13,12 @@
 		633D1CA42147A256000F39B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 633D1CA32147A256000F39B2 /* Assets.xcassets */; };
 		633D1CA72147A256000F39B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 633D1CA52147A256000F39B2 /* LaunchScreen.storyboard */; };
 		633D1CAA2147A256000F39B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CA92147A256000F39B2 /* main.m */; };
+		633D1CB32147A2BE000F39B2 /* PIPImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CB22147A2BE000F39B2 /* PIPImagePickerController.m */; };
+		633D1CB62147A406000F39B2 /* PIPAlbumDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CB52147A406000F39B2 /* PIPAlbumDetailViewController.m */; };
+		633D1CB92147A40E000F39B2 /* PIPAlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CB82147A40E000F39B2 /* PIPAlbumListViewController.m */; };
+		633D1CBC2147A684000F39B2 /* PIPImagePickerDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CBB2147A684000F39B2 /* PIPImagePickerDataManager.m */; };
+		633D1CBF2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CBE2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m */; };
+		633D1CC22147C211000F39B2 /* PIPAlbumDetailPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CC12147C211000F39B2 /* PIPAlbumDetailPageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,18 @@
 		633D1CA62147A256000F39B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		633D1CA82147A256000F39B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		633D1CA92147A256000F39B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		633D1CB12147A2BE000F39B2 /* PIPImagePickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPImagePickerController.h; sourceTree = "<group>"; };
+		633D1CB22147A2BE000F39B2 /* PIPImagePickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPImagePickerController.m; sourceTree = "<group>"; };
+		633D1CB42147A406000F39B2 /* PIPAlbumDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPAlbumDetailViewController.h; sourceTree = "<group>"; };
+		633D1CB52147A406000F39B2 /* PIPAlbumDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPAlbumDetailViewController.m; sourceTree = "<group>"; };
+		633D1CB72147A40E000F39B2 /* PIPAlbumListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPAlbumListViewController.h; sourceTree = "<group>"; };
+		633D1CB82147A40E000F39B2 /* PIPAlbumListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPAlbumListViewController.m; sourceTree = "<group>"; };
+		633D1CBA2147A684000F39B2 /* PIPImagePickerDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPImagePickerDataManager.h; sourceTree = "<group>"; };
+		633D1CBB2147A684000F39B2 /* PIPImagePickerDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPImagePickerDataManager.m; sourceTree = "<group>"; };
+		633D1CBD2147AC9F000F39B2 /* PIPAssetCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPAssetCollectionViewCell.h; sourceTree = "<group>"; };
+		633D1CBE2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPAssetCollectionViewCell.m; sourceTree = "<group>"; };
+		633D1CC02147C211000F39B2 /* PIPAlbumDetailPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPAlbumDetailPageViewController.h; sourceTree = "<group>"; };
+		633D1CC12147C211000F39B2 /* PIPAlbumDetailPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPAlbumDetailPageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +60,7 @@
 		633D1C8E2147A255000F39B2 = {
 			isa = PBXGroup;
 			children = (
+				633D1CB02147A299000F39B2 /* Source */,
 				633D1C992147A255000F39B2 /* PonyImagePicker */,
 				633D1C982147A255000F39B2 /* Products */,
 			);
@@ -71,6 +90,25 @@
 			path = PonyImagePicker;
 			sourceTree = "<group>";
 		};
+		633D1CB02147A299000F39B2 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				633D1CB12147A2BE000F39B2 /* PIPImagePickerController.h */,
+				633D1CB22147A2BE000F39B2 /* PIPImagePickerController.m */,
+				633D1CBA2147A684000F39B2 /* PIPImagePickerDataManager.h */,
+				633D1CBB2147A684000F39B2 /* PIPImagePickerDataManager.m */,
+				633D1CB72147A40E000F39B2 /* PIPAlbumListViewController.h */,
+				633D1CB82147A40E000F39B2 /* PIPAlbumListViewController.m */,
+				633D1CB42147A406000F39B2 /* PIPAlbumDetailViewController.h */,
+				633D1CB52147A406000F39B2 /* PIPAlbumDetailViewController.m */,
+				633D1CC02147C211000F39B2 /* PIPAlbumDetailPageViewController.h */,
+				633D1CC12147C211000F39B2 /* PIPAlbumDetailPageViewController.m */,
+				633D1CBD2147AC9F000F39B2 /* PIPAssetCollectionViewCell.h */,
+				633D1CBE2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -97,6 +135,7 @@
 		633D1C8F2147A255000F39B2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PIP;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Pony Cui";
 				TargetAttributes = {
@@ -143,7 +182,13 @@
 			files = (
 				633D1C9F2147A255000F39B2 /* ViewController.m in Sources */,
 				633D1CAA2147A256000F39B2 /* main.m in Sources */,
+				633D1CB62147A406000F39B2 /* PIPAlbumDetailViewController.m in Sources */,
 				633D1C9C2147A255000F39B2 /* AppDelegate.m in Sources */,
+				633D1CB92147A40E000F39B2 /* PIPAlbumListViewController.m in Sources */,
+				633D1CC22147C211000F39B2 /* PIPAlbumDetailPageViewController.m in Sources */,
+				633D1CBC2147A684000F39B2 /* PIPImagePickerDataManager.m in Sources */,
+				633D1CB32147A2BE000F39B2 /* PIPImagePickerController.m in Sources */,
+				633D1CBF2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,8 +329,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8M2FQ87SLP;
+				DEVELOPMENT_TEAM = 544P5CH38C;
 				INFOPLIST_FILE = PonyImagePicker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -301,8 +347,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8M2FQ87SLP;
+				DEVELOPMENT_TEAM = 544P5CH38C;
 				INFOPLIST_FILE = PonyImagePicker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
