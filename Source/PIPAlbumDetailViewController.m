@@ -15,16 +15,29 @@
 @property (nonatomic, strong) UICollectionViewFlowLayout *collectionFlowLayout;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray<PHAsset *> *collectionAssets;
+@property (nonatomic, strong) UIToolbar *toolBar;
+@property (nonatomic, strong) UIBarButtonItem *previewItem;
+@property (nonatomic, strong) UIBarButtonItem *finishedItem;
+@property (nonatomic, strong) id selectionChangedObserver;
 
 @end
 
 @implementation PIPAlbumDetailViewController
+
+- (void)dealloc
+{
+    if (self.selectionChangedObserver != nil) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self.selectionChangedObserver];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupNavigationItems];
     [self setupCollectionView];
+    [self setupToolBar];
+    [self setupObserver];
     [self fetchAssets];
 }
 
@@ -48,6 +61,7 @@
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.showsVerticalScrollIndicator = NO;
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
     [self.collectionView registerClass:[PIPAssetCollectionViewCell class]
             forCellWithReuseIdentifier:@"AssetCell"];
     self.collectionView.delegate = self;
@@ -55,13 +69,53 @@
     [self.view addSubview:self.collectionView];
 }
 
+- (void)setupToolBar {
+    self.toolBar = [[UIToolbar alloc] init];
+    self.toolBar.translucent = YES;
+    self.previewItem = [[UIBarButtonItem alloc] initWithTitle:@"预览"
+                                                        style:UIBarButtonItemStyleDone
+                                                       target:self
+                                                       action:@selector(onPreview)];
+    self.finishedItem = [[UIBarButtonItem alloc] initWithTitle:@"完成"
+                                                         style:UIBarButtonItemStyleDone
+                                                        target:self
+                                                        action:@selector(onCommit)];
+    [self.toolBar setItems:@[self.previewItem,
+                             [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                           target:nil
+                                                                           action:nil],
+                             self.finishedItem]];
+    [self.view addSubview:self.toolBar];
+}
+
+- (void)setupObserver {
+    __weak PIPAlbumDetailViewController *welf = self;
+    self.selectionChangedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"PIPImagePickerDataManagerSelectedAssetsChanged" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        PIPAlbumDetailViewController *strongSelf = welf;
+        if (strongSelf != nil) {
+            for (PIPAssetCollectionViewCell *cell in [strongSelf.collectionView visibleCells]) {
+                [cell resetSelectionState];
+            }
+        }
+    }];
+}
+
 - (void)onCancel {
     [self dismissViewControllerAnimated:YES completion:^{ }];
+}
+
+- (void)onPreview {
+    
+}
+
+- (void)onCommit {
+    
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     self.collectionView.frame = self.view.bounds;
+    self.toolBar.frame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
     [self.collectionFlowLayout invalidateLayout];
 }
 
@@ -93,7 +147,7 @@
     PIPAssetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AssetCell"
                                                                                  forIndexPath:indexPath];
     if (indexPath.row < self.collectionAssets.count) {
-        [cell setData:self.collectionAssets[indexPath.row]];
+        [cell setData:self.collectionAssets[indexPath.row] viewController:self];
     }
     return cell;
 }

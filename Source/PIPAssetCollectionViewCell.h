@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
+@class PIPAlbumDetailViewController;
+
 @interface PIPAssetCollectionViewCell : UICollectionViewCell
 
-- (void)setData:(PHAsset *)data;
+- (void)setData:(PHAsset *)data viewController:(PIPAlbumDetailViewController *)viewController;
+
+- (void)resetSelectionState;
 
 @end

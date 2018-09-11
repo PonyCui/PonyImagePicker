@@ -12,8 +12,10 @@
 @interface PIPImagePickerDataManager : NSObject
 
 @property (nonatomic, assign) BOOL allowMultipeSelection;
+@property (nonatomic, assign) NSInteger maximumMultipeSelection;
 @property (nonatomic, assign) PHAssetMediaType allowMediaTypes;
 @property (nonatomic, assign) BOOL allowMutlipeMediaTypes;
+@property (nonatomic, strong) NSMutableArray<PHAsset *> *selectedAssets;
 
 - (void)grantPermission:(nonnull void (^)(void))resolver
                rejecter:(nonnull void (^)(void))rejecter;
@@ -21,5 +23,7 @@
 - (nonnull NSArray<PHAssetCollection *> *)fetchAssetCollectionsItems;
 
 - (nonnull NSArray<PHAsset *> *)fetchAssetsItems:(nullable PHCollection *)inCollection;
+
+- (void)notifySelectedAssetsChanged;
 
 @end

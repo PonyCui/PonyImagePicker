@@ -16,8 +16,10 @@
     self = [super init];
     if (self) {
         _allowMultipeSelection = YES;
+        _maximumMultipeSelection = 9;
         _allowMediaTypes = PHAssetMediaTypeImage;
         _allowMutlipeMediaTypes = NO;
+        _selectedAssets = [NSMutableArray array];
     }
     return self;
 }
@@ -98,6 +100,10 @@
         }
         return [assets copy];
     }
+}
+
+- (void)notifySelectedAssetsChanged {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PIPImagePickerDataManagerSelectedAssetsChanged" object:nil];
 }
 
 @end

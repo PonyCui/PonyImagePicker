@@ -12,6 +12,7 @@
 @interface PIPImagePickerController : UINavigationController
 
 @property (nonatomic, assign) BOOL allowMultipeSelection;
+@property (nonatomic, assign) NSInteger maximumMultipeSelection;
 @property (nonatomic, assign) PHAssetMediaType allowMediaTypes;
 @property (nonatomic, assign) BOOL allowMutlipeMediaTypes;
 

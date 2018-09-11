@@ -24,6 +24,7 @@
     self = [super init];
     if (self) {
         _allowMultipeSelection = YES;
+        _maximumMultipeSelection = 9;
         _allowMediaTypes = PHAssetMediaTypeImage;
         _allowMutlipeMediaTypes = NO;
     }
@@ -51,6 +52,11 @@
 - (void)setAllowMultipeSelection:(BOOL)allowMultipeSelection {
     _allowMultipeSelection = allowMultipeSelection;
     self.dataManager.allowMultipeSelection = allowMultipeSelection;
+}
+
+- (void)setMaximumMultipeSelection:(NSInteger)maximumMultipeSelection {
+    _maximumMultipeSelection = maximumMultipeSelection;
+    self.dataManager.maximumMultipeSelection = maximumMultipeSelection;
 }
 
 - (void)setAllowMediaTypes:(PHAssetMediaType)allowMediaTypes {
