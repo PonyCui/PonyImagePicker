@@ -62,7 +62,12 @@
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.showsVerticalScrollIndicator = NO;
-    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
+    if (!self.dataManager.allowMultipeSelection) {
+        self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    }
+    else {
+        self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
+    }
     [self.collectionView registerClass:[PIPAssetCollectionViewCell class]
             forCellWithReuseIdentifier:@"AssetCell"];
     self.collectionView.delegate = self;
@@ -72,6 +77,9 @@
 
 - (void)setupToolBar {
     self.toolBar = [[UIToolbar alloc] init];
+    if (!self.dataManager.allowMultipeSelection) {
+        self.toolBar.hidden = YES;
+    }
     self.toolBar.translucent = YES;
     self.previewItem = [[UIBarButtonItem alloc] initWithTitle:@"预览"
                                                         style:UIBarButtonItemStyleDone

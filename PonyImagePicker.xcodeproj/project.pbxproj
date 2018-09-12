@@ -19,6 +19,7 @@
 		633D1CBC2147A684000F39B2 /* PIPImagePickerDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CBB2147A684000F39B2 /* PIPImagePickerDataManager.m */; };
 		633D1CBF2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CBE2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m */; };
 		633D1CC22147C211000F39B2 /* PIPAlbumDetailPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CC12147C211000F39B2 /* PIPAlbumDetailPageViewController.m */; };
+		633D1CC52148A4D7000F39B2 /* PIPImageEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633D1CC42148A4D7000F39B2 /* PIPImageEditorViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		633D1CBE2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPAssetCollectionViewCell.m; sourceTree = "<group>"; };
 		633D1CC02147C211000F39B2 /* PIPAlbumDetailPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPAlbumDetailPageViewController.h; sourceTree = "<group>"; };
 		633D1CC12147C211000F39B2 /* PIPAlbumDetailPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPAlbumDetailPageViewController.m; sourceTree = "<group>"; };
+		633D1CC32148A4D7000F39B2 /* PIPImageEditorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPImageEditorViewController.h; sourceTree = "<group>"; };
+		633D1CC42148A4D7000F39B2 /* PIPImageEditorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPImageEditorViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				633D1CB52147A406000F39B2 /* PIPAlbumDetailViewController.m */,
 				633D1CC02147C211000F39B2 /* PIPAlbumDetailPageViewController.h */,
 				633D1CC12147C211000F39B2 /* PIPAlbumDetailPageViewController.m */,
+				633D1CC32148A4D7000F39B2 /* PIPImageEditorViewController.h */,
+				633D1CC42148A4D7000F39B2 /* PIPImageEditorViewController.m */,
 				633D1CBD2147AC9F000F39B2 /* PIPAssetCollectionViewCell.h */,
 				633D1CBE2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m */,
 			);
@@ -189,6 +194,7 @@
 				633D1CBC2147A684000F39B2 /* PIPImagePickerDataManager.m in Sources */,
 				633D1CB32147A2BE000F39B2 /* PIPImagePickerController.m in Sources */,
 				633D1CBF2147AC9F000F39B2 /* PIPAssetCollectionViewCell.m in Sources */,
+				633D1CC52148A4D7000F39B2 /* PIPImageEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

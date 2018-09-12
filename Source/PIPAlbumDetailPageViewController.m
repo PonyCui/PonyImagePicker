@@ -9,6 +9,7 @@
 #import "PIPAlbumDetailPageViewController.h"
 #import <Photos/Photos.h>
 #import "PIPImagePickerController.h"
+#import "PIPImageEditorViewController.h"
 
 @interface PIPAlbumDetailPageItemViewController: UIViewController
 
@@ -99,6 +100,9 @@
 
 - (void)setupToolBar {
     self.toolBar = [[UIToolbar alloc] init];
+    if (!self.dataManager.allowMultipeSelection) {
+        self.toolBar.hidden = YES;
+    }
     self.toolBar.translucent = YES;
     self.finishedItem = [[UIBarButtonItem alloc] initWithTitle:@"完成"
                                                          style:UIBarButtonItemStyleDone
@@ -154,7 +158,11 @@
     PIPAlbumDetailPageItemViewController *viewController = self.pageViewController.viewControllers.firstObject;
     if (viewController != nil) {
         NSUInteger selectionIndex = [self.dataManager.selectedAssets indexOfObject:viewController.asset];
-        if (selectionIndex != NSNotFound) {
+        if (!self.dataManager.allowMultipeSelection) {
+            [self.finishedItem setTitle:@"选择"];
+            self.navigationItem.rightBarButtonItem = self.finishedItem;
+        }
+        else if (selectionIndex != NSNotFound) {
             self.selectedButton.frame = CGRectMake(0, 0, 44, 44);
             self.selectedButtonLabel.frame = CGRectMake(44 - 24, (44 - 24) / 2, 24, 24);
             self.selectedButtonLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)(selectionIndex + 1)];
@@ -163,19 +171,32 @@
         }
         else {
             self.selectButton.frame = CGRectMake(0, 0, 44, 44);
-            self.selectButton.enabled = !(self.dataManager.selectedAssets.count >= self.dataManager.maximumMultipeSelection ||
-            (!self.dataManager.allowMultipeSelection && self.dataManager.selectedAssets.count > 0));
+            self.selectButton.enabled = !(self.dataManager.selectedAssets.count >= self.dataManager.maximumMultipeSelection);
             self.selectButton.userInteractionEnabled = self.selectButton.enabled;
             self.selectButton.alpha = self.selectButton.enabled ? 1.0 : 0.35;
             UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.selectButton];
             self.navigationItem.rightBarButtonItem = item;
         }
     }
-    self.finishedItem.enabled = self.dataManager.selectedAssets.count > 0;
+    self.finishedItem.enabled = !self.dataManager.allowMultipeSelection || self.dataManager.selectedAssets.count > 0;
 }
 
 - (void)onCommit {
-    if ([self.navigationController isKindOfClass:[PIPImagePickerController class]]) {
+    if (!self.dataManager.allowMultipeSelection) {
+        if ([self.pageViewController.viewControllers.firstObject asset] != nil) {
+            [self.dataManager.selectedAssets removeAllObjects];
+            [self.dataManager.selectedAssets addObject:[self.pageViewController.viewControllers.firstObject asset]];
+            if (self.dataManager.editor == PIPImagePickerEditorNone) {
+                [(PIPImagePickerController *)self.navigationController onCommit];
+            }
+            else {
+                PIPImageEditorViewController *editorViewController = [[PIPImageEditorViewController alloc] init];
+                editorViewController.dataManager = self.dataManager;
+                [self.navigationController pushViewController:editorViewController animated:YES];
+            }
+        }
+    }
+    else if ([self.navigationController isKindOfClass:[PIPImagePickerController class]]) {
         [(PIPImagePickerController *)self.navigationController onCommit];
     }
 }

@@ -89,4 +89,9 @@
     self.dataManager.maximumBoundsOfImages = maximumBoundsOfImages;
 }
 
+- (void)setEditor:(PIPImagePickerEditor)editor {
+    _editor = editor;
+    self.dataManager.editor = editor;
+}
+
 @end

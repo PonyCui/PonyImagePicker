@@ -19,6 +19,12 @@
 
 @end
 
+typedef enum : NSUInteger {
+    PIPImagePickerEditorNone = 0,
+    PIPImagePickerEditorSquare,
+    PIPImagePickerEditorCircle,
+} PIPImagePickerEditor;
+
 @interface PIPImagePickerController : UINavigationController
 
 @property (nonatomic, weak) id<PIPImagePickerControllerDelegate> imagePickerDelegate;
@@ -27,6 +33,7 @@
 @property (nonatomic, assign) PHAssetMediaType allowMediaTypes;
 @property (nonatomic, assign) BOOL allowMutlipeMediaTypes;
 @property (nonatomic, assign) NSInteger maximumBoundsOfImages;
+@property (nonatomic, assign) PIPImagePickerEditor editor;
 
 - (void)onCommit;
 

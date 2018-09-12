@@ -124,6 +124,9 @@
     PHAsset *asset = [assets firstObject];
     [assets removeObjectAtIndex:0];
     [self doFetchAssetImage:asset resolver:^(UIImage *result) {
+        if (self.editorBlock) {
+            result = self.editorBlock(result) ?: result;
+        }
         [results addObject:result];
         [self fetchSelectionAssetsImages:assets
                                  results:results

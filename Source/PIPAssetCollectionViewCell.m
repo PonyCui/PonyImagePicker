@@ -93,7 +93,11 @@
 - (void)resetSelectionState {
     if (self.viewController != nil && self.data != nil) {
         NSUInteger atIndex = [self.viewController.dataManager.selectedAssets indexOfObject:self.data];
-        if (atIndex != NSNotFound) {
+        if (!self.viewController.dataManager.allowMultipeSelection) {
+            self.selectButton.hidden = YES;
+            self.selectedButton.hidden = YES;
+        }
+        else if (atIndex != NSNotFound) {
             [self.selectedButtonLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)(atIndex + 1)]];
             self.selectedButton.hidden = NO;
             self.selectButton.hidden = YES;
@@ -103,8 +107,7 @@
         else {
             self.selectedButton.hidden = YES;
             self.selectButton.hidden = NO;
-            if (self.viewController.dataManager.selectedAssets.count >= self.viewController.dataManager.maximumMultipeSelection ||
-                (!self.viewController.dataManager.allowMultipeSelection && self.viewController.dataManager.selectedAssets.count > 0)) {
+            if (self.viewController.dataManager.selectedAssets.count >= self.viewController.dataManager.maximumMultipeSelection) {
                 self.selectButton.enabled = NO;
                 self.imageView.alpha = 0.35;
             }

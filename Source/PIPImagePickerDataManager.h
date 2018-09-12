@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
+#import "PIPImagePickerController.h"
+
+typedef UIImage *(^PIPImagePickerEditorProcessBlock)(UIImage *originalImage);
 
 @interface PIPImagePickerDataManager : NSObject
 
@@ -16,6 +19,8 @@
 @property (nonatomic, assign) PHAssetMediaType allowMediaTypes;
 @property (nonatomic, assign) BOOL allowMutlipeMediaTypes;
 @property (nonatomic, assign) NSInteger maximumBoundsOfImages;
+@property (nonatomic, assign) PIPImagePickerEditor editor;
+@property (nonatomic, copy) PIPImagePickerEditorProcessBlock editorBlock;
 @property (nonatomic, strong) NSMutableArray<PHAsset *> *selectedAssets;
 
 - (void)grantPermission:(nonnull void (^)(void))resolver
